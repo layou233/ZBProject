@@ -7,7 +7,8 @@
     },
     "links" : {
         "sidebar" : {
-            "Home" : "https://zbchecker.ml"
+            "Home" : "https://zbchecker.ml",
+            "Blog" : "https://hypixel.design"
         }
     }
 }
