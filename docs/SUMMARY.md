@@ -5,5 +5,6 @@
   * [Config](ZBChecker/config.md)
 * [MCBot](MCBot/README.md)
   * [CheckerBot](MCBot/CheckerBot.md)
-* ZBProxy
+* [ZBProxy](ZBProxy/README.md)
+  * [Config](ZBProxy/config.md)
 
