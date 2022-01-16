@@ -64,7 +64,7 @@ When only the first five options are included in a `Service` configuration, ZBPr
 | TargetAddress *(Required)*  | string                     | The address you want proxy. (without port)<br />你想要代理的地址，不包括端口号。 |
 | TargetPort *(Required)*     | uint8 (unsigned short)     | The port of the address you want to proxy. (from 0 to 65535)<br />你想要代理的端口，范围在0到65535。 |
 | Listen *(Required)*         | uint8 (unsigned short)     | The port you want to listen on 0.0.0.0. (from 0 to 65535)<br />你想要监听的本地端口，默认在0.0.0.0上监听，范围在0到65535。 |
-| Flow *(Required)*           | string **(flow type)**     | The flow control method you want to choose: `auto`, `linux-zerocopy`, `origin`.<br />For more information, go to Flow page.<br />选择的流控模式，可选项如上，保持默认即可。<br />更多有关流控模式的信息，前往 流控 页。 |
+| Flow *(Required)*           | string **(flow type)**     | The flow control method you want to choose: `auto`, `linux-zerocopy`, `multiple`, `origin`.<br />For more information, go to Flow page.<br />选择的流控模式，可选项如上，保持默认即可。<br />更多有关流控模式的信息，前往 流控 页。 |
 | EnableHostnameRewrite       | boolean                    | Hostname is used to bypass Hypixel unofficial hostname detection etc.  If you are proxying Hypixel, turn on this.<br />主机名重写用于绕过 Hypixel 非官方主机名检测之类，如果你正在转发 Hypixel，则需要开启这个。 |
 | RewrittenHostname           | string                     | If you enable hostname rewriting, then this setting is used to determine the rewritten hostname.<br />Leave blank to automatically set to `TargetAddress`.<br />如果你启用了主机名重写，那么此设置用于决定重写的主机名。<br />留空则自动设置为`TargetAddress`。 |
 | EnableAnyDest               | boolean                    | *Not Implemented Yet*                                        |
