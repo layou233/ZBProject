@@ -13,4 +13,5 @@ All source code are saved on Github. If you need a executable file, go to the Gi
 
 
 ## Disclaimer
-**ZBProxy** is a open source software of **[@layou233](https://github.com/layou233)** and are in no way associated with Hypixel Inc. or Mojang Studios.
+**ZBProxy** is an open source software of **[@layou233](https://github.com/layou233)** and are in no way associated with Hypixel Inc. or Mojang Studios.
+
