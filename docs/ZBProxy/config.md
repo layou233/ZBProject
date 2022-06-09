@@ -88,16 +88,16 @@ The port you want to listen on 0.0.0.0. (from 0 to 65535)
 
 > `Flow` *(Required)* : "auto" | "linux-zerocopy" | "multiple" | "origin"
 
-For more information, go to Flow page.  
+For more information, go to [Flow](flow.html) page.  
 选择的流控模式，可选项如上，保持默认即可。  
-更多有关流控模式的信息，前往 流控 页。  
+更多有关流控模式的信息，前往 [流控](flow.html) 页。  
 
 > `IPAccess` : AccessControl Object
 
 Access control module for restricting client IP access.  
-For more information, go to AccessControl page.  
+For more information, go to [AccessControl](access.html) page.  
 用于控制客户端IP访问的 访问控制 模块。  
-详见 访问控制 页。
+详见 [访问控制](access.html) 页。
 
 > `Minecraft` : Minecraft Object
 
@@ -121,9 +121,9 @@ Leave blank to automatically set to `TargetAddress`.
 > `NameAccess` : AccessControl Object
 
 Access control module for restricting player name access.  
-For more information, go to AccessControl page.  
+For more information, go to [AccessControl](access.html) page.  
 用于控制 玩家名 加入游戏的 访问控制 模块。  
-详见 访问控制 页。
+详见 [访问控制](access.html) 页。
 
 > `EnableAnyDest` : boolean
 > `AnyDestSettings` : AnyDestSettings Object
