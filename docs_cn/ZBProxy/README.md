@@ -2,16 +2,16 @@
 
 # ZBProxy 3.0
 
-🚀Transfer your network data, bypassing the Hypixel unofficial address detection!  
+🚀加速传输您的网络数据，绕过Hypixel非官方地址检测! 
 
-This is the official document of [ZBProxy](https://github.com/layou233/ZBProxy), maintained by **[@layou233](https://github.com/layou233)**.
+这是 [ZBProxy](https://github.com/layou233/ZBProxy) 的官方文档, 由 **[@layou233](https://github.com/layou233)** 负责维护.
 
-## Downloads
-All source code are saved on Github. If you need a executable file, go to the Github Action page and download the newest successful build.  
+## 下载
+所有的源代码保存在Github上。如果您需要一个可执行文件，请转到Github Action页面并下载最新的成功构建。 
 
-***Please note that ZBProxy is licensed under the [Apache License 2.0](https://github.com/layou233/ZBProxy/blob/master/LICENSE). You should distribute it according to the licensed method.**
+***ZBProxy根据 [Apache License 2.0](https://github.com/layou233/ZBProxy/blob/master/LICENSE) 开源. 您应该根据许可的方法使用它.**
 
 
-## Disclaimer
-**ZBProxy** is an open source software of **[@layou233](https://github.com/layou233)** and are in no way associated with Hypixel Inc. or Mojang Studios.
+## 免责声明
+**ZBProxy** 是由 **[@layou233](https://github.com/layou233)** 开发的开源软件, 与Hypixel Inc.或Mojang Studios没有任何关系.
 
