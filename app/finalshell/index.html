@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FinalShell-Helper Online</title>
+    <meta name="description" content="FinalShell-Helper Online">
+    <meta name="keywords" content="finalshell, ssh, sftp, code, crack">
+    <meta charset="utf-8">
+    <meta name="baidu-site-verification" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <link rel="icon" href="../../favicon.ico" />
+    <link rel="shortcut icon" href="../../favicon.ico" />
+    <script src="../../js/md5.min.js"></script>
+    <script type="text/javascript">
+        function gen() {
+            const hwid = document.getElementById("hwid").value;
+            document.getElementById("pro").value = MD5(`2356${hwid}13593`).substring(8, 24);
+            document.getElementById("adv").value = MD5(`61305${hwid}8552`).substring(8, 24);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>FinalShell-Helper</h1>
+    <a>友情链接：
+        <a href="https://t.me/Oracle_Cloud_Free">Oracle交流群</a>
+        |
+        <a href="https://github.com/layou233/FinalShell-Helper">原mirai插件(同作者)</a>
+        |
+        <a href="https://www.hostbuf.com/t/988.html">FinalShell官网下载</a>
+    </a>
+
+    <hr align="left" width="600" size="3">
+    <a>输入你的机器码：
+        <input id="hwid" type="search" size="30" oninput="javascript:gen()" autofocus></input>
+    </a>
+    <p></p>
+    <a>👑专业版：<input id="pro" size="20" readonly></input></a>
+    <br>
+    <a>😄高级版：<input id="adv" size="20" readonly></input></a>
+    <p>免责声明：所有后果与作者无关，仅供研究和学习使用！</p>
+</body>
+
+</html>
