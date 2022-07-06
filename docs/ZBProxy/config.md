@@ -30,6 +30,7 @@ The full config is looked like this: (ZBProxy 3.0-rc.3+)
             "Minecraft": {
                 "EnableHostnameRewrite": true,
                 "RewrittenHostname": "",
+                "IgnoreFMLSuffix": true,
                 "NameAccess": {
                     "Mode": "",
                     "ListTags": []
@@ -73,7 +74,7 @@ The name of the service which is used to be shown in the log or MOTD *{NAME}* ta
 
 > `TargetAddress` *(Requied)* : string
 
-The address you want proxy. (without port)  
+The address you want to proxy. (without port)  
 你想要代理的地址，不包括端口号。  
 
 > `TargetPort` *(Required)* : uint8 (unsigned short)
@@ -117,6 +118,16 @@ If you enable hostname rewriting, then this setting is used to determine the rew
 Leave blank to automatically set to `TargetAddress`.  
 如果你启用了主机名重写，那么此设置用于决定重写的主机名。  
 留空则自动设置为`TargetAddress`。  
+
+> `IgnoreFMLSuffix` : string
+
+See [https://github.com/layou233/ZBProxy/issues/12](https://github.com/layou233/ZBProxy/issues/12).  
+This will ignore the FML signature that mentioned in this issue, which may cause players unable to join the game if remote server is a FML server.  
+But for some servers, this could help players to bypass the client mods check.  
+We enables it as default, change it at your own risk.  
+这将忽略此issue所提及的 FML标识，可能导致玩家无法连接到服务端是FML的服务器，多数为mod服。  
+但是对于一些服务器，这可能帮助玩家绕过一些客户端模组检测。  
+我们默认启用它，请视情况修改。  
 
 > `NameAccess` : AccessControl Object
 
