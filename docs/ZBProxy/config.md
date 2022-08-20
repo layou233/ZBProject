@@ -30,6 +30,11 @@ The full config is looked like this: (ZBProxy 3.0-rc.3+)
             "Minecraft": {
                 "EnableHostnameRewrite": true,
                 "RewrittenHostname": "",
+                "OnlineCount": {
+                    "Max": 114514,
+                    "Online": -1,
+                    "EnableMaxLimit": false
+                },
                 "IgnoreFMLSuffix": true,
                 "NameAccess": {
                     "Mode": "",
@@ -39,6 +44,16 @@ The full config is looked like this: (ZBProxy 3.0-rc.3+)
                 "AnyDestSettings": {},
                 "MotdFavicon": "{DEFAULT_MOTD}",
                 "MotdDescription": "§d{NAME}§e service is working on §a§o{INFO}§r\n§c§lProxy for §6§n{HOST}:{PORT}§r"
+            },
+            "TLSSniffing": {
+                "RejectNonTLS": false,
+                "RejectIfNonMatch": false,
+                "SNIAllowListTags": []
+            },
+            "Outbound": {
+                "Type": "",
+                "Network": "tcp",
+                "Address": ""
             }
         }
     ],
@@ -119,6 +134,12 @@ Leave blank to automatically set to `TargetAddress`.
 如果你启用了主机名重写，那么此设置用于决定重写的主机名。  
 留空则自动设置为`TargetAddress`。  
 
+> `OnlineCount` : OnlineCount Object
+
+Settings of online player count displayed in the MOTD and total player numbers limit.  
+MOTD中显示的在线玩家数量 和 总玩家人数限制 的设置。  
+*See below.*  
+
 > `IgnoreFMLSuffix` : string
 
 See [https://github.com/layou233/ZBProxy/issues/12](https://github.com/layou233/ZBProxy/issues/12).  
@@ -147,4 +168,24 @@ For more information, go to [AccessControl](access.html) page.
 The MOTD for Minecraft server list.  
 For more information, go to MOTD page.  
 修改 Minecraft 服务器列表的 MOTD。  
-更多有关MOTD的信息，前往 MOTD 页。
+更多有关MOTD的信息，前往 MOTD 页。  
+
+
+## OnlineCount Object
+
+> `Max` : int32
+
+Maximum number of players displayed.  
+显示的最大玩家数量。  
+
+> `Online` : int32
+
+Number of online players displayed.  
+If `Online` is less than 0, it will be automatically set to the real-time number of players using this service.  
+显示的在线玩家数量。  
+如果`Online`小于0，会自动设置为使用该服务的实时玩家人数。  
+
+> `EnableMaxLimit` : boolean
+
+Enable max player number limit and use the number in `Max` as the maximum number of players.  
+启用最大玩家数量限制，并将`Max`中的数字作为最大玩家数。

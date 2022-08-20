@@ -21,9 +21,9 @@ Key is used as List Tag which used to be a identify for a list.
 
 键 被用作 List Tag，用于识别一个列表。  
 
-The list itself is meaningless and the content is non repetitive. The current version is mainly used it in conjunction with Access Control.  
+The list itself is meaningless and the content is non repetitive. The current version is mainly used it in conjunction with Access Control and TLSSniffing.  
 
-列表本身是无意义且内容非重复的。当前版本通常将其与 版本控制 一同使用。
+列表本身是无意义且内容非重复的。当前版本通常将其与 版本控制 和 TLS嗅探 一同使用。
 
 
 
