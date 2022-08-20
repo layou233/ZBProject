@@ -158,11 +158,13 @@ For more information, go to [AccessControl](access.html) page.
 详见 [访问控制](access.html) 页。
 
 > `EnableAnyDest` : boolean
+
 > `AnyDestSettings` : AnyDestSettings Object
 
 *Not Implemented Yet*  
 
 > `MotdFavicon` : string (base64 png, 64\*64)
+
 > `MotdDescription` : string
 
 The MOTD for Minecraft server list.  
