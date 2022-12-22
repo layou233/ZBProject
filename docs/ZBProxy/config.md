@@ -140,7 +140,7 @@ Settings of online player count displayed in the MOTD and total player numbers l
 MOTD中显示的在线玩家数量 和 总玩家人数限制 的设置。  
 *See below.*  
 
-> `IgnoreFMLSuffix` : string
+> `IgnoreFMLSuffix` : boolean
 
 See [https://github.com/layou233/ZBProxy/issues/12](https://github.com/layou233/ZBProxy/issues/12).  
 This will ignore the FML signature that mentioned in this issue, which may cause players unable to join the game if remote server is a FML server.  
