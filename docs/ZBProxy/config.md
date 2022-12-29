@@ -12,7 +12,7 @@ Configuration file, which is called `ZBProxy.json`, is used to set all options t
 
 ZBProxy 的配置文件是`ZBProxy.json`，配置文件用于设置所有的选项以完全释放 ZBProxy 的强大力量。
 
-The full config is looked like this: (ZBProxy 3.0-rc.3+)
+The full config is looked like this: (ZBProxy 3.0-rc.4+)
 
 ```json
 {
@@ -35,13 +35,14 @@ The full config is looked like this: (ZBProxy 3.0-rc.3+)
                     "Online": -1,
                     "EnableMaxLimit": false
                 },
-                "IgnoreFMLSuffix": true,
+                "IgnoreFMLSuffix": false,
                 "NameAccess": {
                     "Mode": "",
                     "ListTags": []
                 },
                 "EnableAnyDest": false,
                 "AnyDestSettings": {},
+                "PingMode": "",
                 "MotdFavicon": "{DEFAULT_MOTD}",
                 "MotdDescription": "§d{NAME}§e service is working on §a§o{INFO}§r\n§c§lProxy for §6§n{HOST}:{PORT}§r"
             },
@@ -124,15 +125,16 @@ For more information, go to [AccessControl](access.html) page.
 
 > `EnableHostnameRewrite` : boolean
 
-Hostname is used to bypass Hypixel unofficial hostname detection etc.  If you are proxying Hypixel, turn on this.  
-主机名重写用于绕过 Hypixel 非官方主机名检测之类，如果你正在转发 Hypixel，则需要开启这个。  
+Hostname rewritten is used to bypass Hypixel unofficial hostname detection etc.  
+If you are proxying Hypixel, turn on this.  
+主机名重写用于绕过 Hypixel 非官方主机名检测之类。如果你正在转发 Hypixel，则需要开启这个。  
 
 > `RewrittenHostname` : string
 
 If you enable hostname rewriting, then this setting is used to determine the rewritten hostname.  
-Leave blank to automatically set to `TargetAddress`.  
+Automatically set to `TargetAddress` if empty.  
 如果你启用了主机名重写，那么此设置用于决定重写的主机名。  
-留空则自动设置为`TargetAddress`。  
+留空则自动设置为 `TargetAddress`。  
 
 > `OnlineCount` : OnlineCount Object
 
@@ -145,10 +147,10 @@ MOTD中显示的在线玩家数量 和 总玩家人数限制 的设置。
 See [https://github.com/layou233/ZBProxy/issues/12](https://github.com/layou233/ZBProxy/issues/12).  
 This will ignore the FML signature that mentioned in this issue, which may cause players unable to join the game if remote server is a FML server.  
 But for some servers, this could help players to bypass the client mods check.  
-We enables it as default, change it at your own risk.  
-这将忽略此issue所提及的 FML标识，可能导致玩家无法连接到服务端是FML的服务器，多数为mod服。  
+It has been observed in practice that this may cause the FML client to print a lot of warning logs (but does not affect the game), so change it at your own risk.  
+这将忽略此 issue 所提及的 FML 标识，可能导致玩家无法连接到服务端是FML的服务器，多数为mod服。  
 但是对于一些服务器，这可能帮助玩家绕过一些客户端模组检测。  
-我们默认启用它，请视情况修改。  
+经过实践观察，这可能导致 FML 客户端打印大量警告日志（但不影响游戏），故请据需要修改。  
 
 > `NameAccess` : AccessControl Object
 
@@ -162,6 +164,18 @@ For more information, go to [AccessControl](access.html) page.
 > `AnyDestSettings` : AnyDestSettings Object
 
 *Not Implemented Yet*  
+
+> `PingMode` : empty | "disconnect" | "0ms"
+
+Display mode for Server List Ping.  
+服务器列表 Ping 的显示模式
+
+- `disconnect`: Display `(no connection)` on server list. 在服务器列表上显示 无连接。
+
+- `0ms`: Always display 0 ms latency on server list. 始终在服务器列表上显示 0 ms 的延迟。
+
+It will display the latency between client and ZBProxy if empty (or as default) when any Minecraft-related feature is enabled, and display latency between client and target when no Minecraft-related feature is enabled.  
+如果为空（或默认），则会在有启用任何与 Minecraft 相关的功能时显示客户端和 ZBProxy 之间的延迟，并在未启用与 Minecraft 相关的功能时显示客户端和目标之间的延迟。
 
 > `MotdFavicon` : string (base64 png, 64\*64)
 
