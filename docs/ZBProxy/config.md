@@ -177,6 +177,9 @@ Display mode for Server List Ping.
 It will display the latency between client and ZBProxy if empty (or as default) when any Minecraft-related feature is enabled, and display latency between client and target when no Minecraft-related feature is enabled.  
 如果为空（或默认），则会在有启用任何与 Minecraft 相关的功能时显示客户端和 ZBProxy 之间的延迟，并在未启用与 Minecraft 相关的功能时显示客户端和目标之间的延迟。
 
+Refer to our development blog: 请参阅我们的开发博客：  
+[十分钟：我们如何把加速 IP 做到 0 ms？](https://www.bilibili.com/read/cv21180654)
+
 > `MotdFavicon` : string (base64 png, 64\*64)
 
 > `MotdDescription` : string
