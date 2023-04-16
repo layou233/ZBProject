@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>File->Base64</title>
+    <meta name="description" content="File to Base64 encoder">
+    <meta name="keywords" content="base64, png, minecraft-motd, base64-encode, zbproxy">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <link rel="icon" href="../favicon.ico" />
+    <link rel="shortcut icon" href="../favicon.ico" />
+</head>
+
+<body>
+    <h1>File->Base64</h1>
+    <p>Made with ❤️ by <a href="https://github.com/layou233">GitHub@layou233</a></p>
+
+    <div>
+        <input type="file" id="file-input">
+        <button id="copy-button">Copy To Clipboard</button>
+    </div>
+
+    <br>
+    <textarea id="base64-output" cols="40" rows="10" readonly></textarea>
+
+    <br>
+    <img id="image-preview">
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const imagePreview = document.getElementById('image-preview');
+        const base64Output = document.getElementById('base64-output');
+        const copyButton = document.getElementById('copy-button');
+
+        const reader = new FileReader();
+        fileInput.addEventListener('change', function () {
+            const file = this.files[0];
+
+            reader.onload = function (event) {
+                const base64 = event.target.result;
+                imagePreview.src = base64;
+                base64Output.value = base64;
+            };
+
+            reader.readAsDataURL(file);
+        });
+
+        copyButton.addEventListener('click', function () {
+            base64Output.select();
+            document.execCommand('copy');
+            alert('Successfully copied to your clipboard!');
+        });
+    </script>
+</body>
+
+</html>

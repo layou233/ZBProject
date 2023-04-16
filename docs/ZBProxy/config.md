@@ -182,6 +182,15 @@ Refer to our development blog: 请参阅我们的开发博客：
 
 > `MotdFavicon` : string (base64 png, 64\*64)
 
+Base64 encoded 64*64 PNG string.  
+The size of images must be 64*64, as specified by Minecraft. Because of the PNG format, images can include transparency.  
+A proper Base64 PNG string should start with `data:image/png;base64,`.  
+You can use [this web application we provide](https://launium.com/app/file-base64.html) to convert PNG image files to Base64 strings.
+Base64 编码的 64*64 PNG 字符串。  
+图片尺寸必须是 64*64 ，这是由 Minecraft 规定的。由于是 PNG 格式，图片中可以包括透明度。  
+正确的 Base64 PNG 字符串应该由 `data:image/png;base64,` 开头。  
+你可以使用[我们提供的这个网页小程序](https://launium.com/app/file-base64.html)来将 PNG 图片文件转为 Base64 字符串。
+
 > `MotdDescription` : string
 
 The MOTD for Minecraft server list.  
