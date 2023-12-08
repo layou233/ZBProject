@@ -27,4 +27,4 @@ weight: 1
 
 最新的主页测试结果，每次访问都会重新评估：
 
-<https://pagespeed.web.dev/analysis/https-launium-com/>
+<https://pagespeed.web.dev/analysis?url=https%3A%2F%2Flaunium.com>

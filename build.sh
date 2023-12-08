@@ -9,3 +9,8 @@ cd ../
 
 # build doc
 npm i -g gitbook-cli && gitbook build ./docs ./public/doc
+
+# copy static pages
+mv app ./public/app
+mv js ./public/js
+mv image ./public/image
