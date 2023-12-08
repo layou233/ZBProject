@@ -17,9 +17,7 @@ emoji = "🍀"
 subtitle = "A ZBProject website."
 
 [sidebar.avatar]
-enabled = true
-local = true
-src = "img/avatar.png"
+enabled = false
 
 [article]
 math = false
