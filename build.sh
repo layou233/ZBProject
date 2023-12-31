@@ -1,9 +1,11 @@
-# install hugo
-CGO_ENABLED=1 GOAMD64=v3 go install -v -trimpath -ldflags="-s -w -buildid=" -tags extended github.com/gohugoio/hugo@latest
+# download hugo to current path
+HUGO_DOWNLOAD_URL="$(curl -Ls --retry 5 --max-time 30 "https://api.github.com/repos/gohugoio/hugo/releases/latest" | grep -Eo 'https:\/\/github.com\/gohugoio\/hugo\/releases\/download\/v[0-9\.]+\/hugo_extended_[0-9\.]+_linux-amd64.tar.gz')"
+wget -O hugo.tar.gz $HUGO_DOWNLOAD_URL
+tar -xzvf hugo.tar.gz
 
 # build home
 cd home
-hugo
+../hugo
 mv public ../public
 cd ../
 
