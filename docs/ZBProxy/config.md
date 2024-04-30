@@ -36,6 +36,10 @@ The full config is looked like this: (ZBProxy 3.0-rc.4+)
                     "EnableMaxLimit": false
                 },
                 "IgnoreFMLSuffix": false,
+                "HostnameAccess": {
+                    "Mode": "",
+                    "ListTags": []
+                },
                 "NameAccess": {
                     "Mode": "",
                     "ListTags": []
@@ -50,6 +54,13 @@ The full config is looked like this: (ZBProxy 3.0-rc.4+)
                 "RejectNonTLS": false,
                 "RejectIfNonMatch": false,
                 "SNIAllowListTags": []
+            },
+            "SocketOptions": {
+                "Mark": 0,
+                "Interface": "",
+                "TCPFastOpen": false,
+                "TCPCongestion": "",
+                "MultiPathTCP": false
             },
             "Outbound": {
                 "Type": "",
@@ -72,6 +83,10 @@ This file consists of a JSON that currently has Services item and Lists item.
 | Lists     | []Lists (list of key-value string lists)           | Definition for lists that currently used for Access Control.<br/>定义用于 访问控制 的列表。 |
 
 ------
+
+> [!TIP]
+> A ZBProxy instance can run multiple services in parallel, depending on the number of Service objects you configure.
+> 一个 ZBProxy 实例可以并行运行多个服务，取决于你配置的 Service 对象数量。
 
 ## ProxyService Object
 
@@ -118,102 +133,85 @@ For more information, go to [AccessControl](access.html) page.
 
 > `Minecraft` : Minecraft Object
 
+Go to [Minecraft](minecraft.html) page.  
+详见 [Minecraft](minecraft.html) 页。
+
+> `TLSSniffing` : TLSSniffing Object
+
+Go to [TLS](tls.html) page.  
+详见 [TLS](tls.html) 页。
+
+> `SocketOptions` : SocketOptions Object
+
+*See below.*
+
+> `Outbound` : Outbound Object
+
 *See below.*
 
 
-## Minecraft Object
+## SocketOptions Object
 
-> `EnableHostnameRewrite` : boolean
+> `Mark` : int
 
-Hostname rewritten is used to bypass Hypixel unofficial hostname detection etc.  
-If you are proxying Hypixel, turn on this.  
-主机名重写用于绕过 Hypixel 非官方主机名检测之类。如果你正在转发 Hypixel，则需要开启这个。  
+Set routing mark for outbound connections if not zero.  
+Supported on Linux (SO_MARK) and FreeBSD (SO_USER_COOKIE).  
+不为 0 时为出站连接设置路由标记。  
+支持 Linux (SO_MARK) 和 FreeBSD (SO_USER_COOKIE)。
 
-> `RewrittenHostname` : string
+> `Interface` : string
 
-If you enable hostname rewriting, then this setting is used to determine the rewritten hostname.  
-Automatically set to `TargetAddress` if empty.  
-如果你启用了主机名重写，那么此设置用于决定重写的主机名。  
-留空则自动设置为 `TargetAddress`。  
+Bind outbound connections to the specified NIC if not empty.  
+Supported on Linux.  
+不为空时将出站连接绑定到指定网卡。  
+支持 Linux。
 
-> `OnlineCount` : OnlineCount Object
+> `TCPFastOpen` : boolean
 
-Settings of online player count displayed in the MOTD and total player numbers limit.  
-MOTD中显示的在线玩家数量 和 总玩家人数限制 的设置。  
-*See below.*  
+Enable TCP fast open support for outbound connections.  
+为出站连接启用 TCP 快速打开 支持。
 
-> `IgnoreFMLSuffix` : boolean
+> `TCPCongestion` : string
 
-See [https://github.com/layou233/ZBProxy/issues/12](https://github.com/layou233/ZBProxy/issues/12).  
-This will ignore the FML signature that mentioned in this issue, which may cause players unable to join the game if remote server is a FML server.  
-But for some servers, this could help players to bypass the client mods check.  
-It has been observed in practice that this may cause the FML client to print a lot of warning logs (but does not affect the game), so change it at your own risk.  
-这将忽略此 issue 所提及的 FML 标识，可能导致玩家无法连接到服务端是FML的服务器，多数为mod服。  
-但是对于一些服务器，这可能帮助玩家绕过一些客户端模组检测。  
-经过实践观察，这可能导致 FML 客户端打印大量警告日志（但不影响游戏），故请据需要修改。  
+Specify TCP congestion control algorithm for outbound connections.  
+Supported on Linux. Needs kernel (module) support for specific algorithms.  
+指定出站连接的 TCP 拥塞控制算法。  
+支持 Linux。需要内核（模块）支持特定算法。
 
-> `NameAccess` : AccessControl Object
+> `MultiPathTCP` : boolean
 
-Access control module for restricting player name access.  
-For more information, go to [AccessControl](access.html) page.  
-用于控制 玩家名 加入游戏的 访问控制 模块。  
-详见 [访问控制](access.html) 页。
-
-> `EnableAnyDest` : boolean
-
-> `AnyDestSettings` : AnyDestSettings Object
-
-*Not Implemented Yet*  
-
-> `PingMode` : empty | "disconnect" | "0ms"
-
-Display mode for Server List Ping.  
-服务器列表 Ping 的显示模式
-
-- `disconnect`: Display `(no connection)` on server list. 在服务器列表上显示 无连接。
-
-- `0ms`: Always display 0 ms latency on server list. 始终在服务器列表上显示 0 ms 的延迟。
-
-It will display the latency between client and ZBProxy if empty (or as default) when any Minecraft-related feature is enabled, and display latency between client and target when no Minecraft-related feature is enabled.  
-如果为空（或默认），则会在有启用任何与 Minecraft 相关的功能时显示客户端和 ZBProxy 之间的延迟，并在未启用与 Minecraft 相关的功能时显示客户端和目标之间的延迟。
-
-Refer to our development blog: 请参阅我们的开发博客：  
-[十分钟：我们如何把加速 IP 做到 0 ms？](https://www.bilibili.com/read/cv21180654)
-
-> `MotdFavicon` : string (base64 png, 64\*64)
-
-Base64 encoded 64*64 PNG string.  
-The size of images must be 64*64, as specified by Minecraft. Because of the PNG format, images can include transparency.  
-A proper Base64 PNG string should start with `data:image/png;base64,`.  
-You can use [this web application we provide](https://launium.com/app/file-base64.html) to convert PNG image files to Base64 strings.
-Base64 编码的 64*64 PNG 字符串。  
-图片尺寸必须是 64*64 ，这是由 Minecraft 规定的。由于是 PNG 格式，图片中可以包括透明度。  
-正确的 Base64 PNG 字符串应该由 `data:image/png;base64,` 开头。  
-你可以使用[我们提供的这个网页小程序](https://launium.com/app/file-base64.html)来将 PNG 图片文件转为 Base64 字符串。
-
-> `MotdDescription` : string
-
-The MOTD for Minecraft server list.  
-For more information, go to MOTD page.  
-修改 Minecraft 服务器列表的 MOTD。  
-更多有关MOTD的信息，前往 MOTD 页。  
+Enable Multipath TCP support for outbound connections.  
+为出站连接启用 多路径 TCP 支持。
 
 
-## OnlineCount Object
+## Outbound Object
 
-> `Max` : int32
+> `Type` : string (Outbound type)
 
-Maximum number of players displayed.  
-显示的最大玩家数量。  
+Outbound type for remote connections. Available options are:  
+用于远程连接的出站类型。可用的选项有：
 
-> `Online` : int32
+- empty string (""), default. Connect directly to the target.
+- "socks"/"socks5". SOCKS protocol version 5, [RFC1928](https://www.rfc-editor.org/rfc/rfc1928.txt).
+- "socks4a". SOCKS protocol version 4A, [specification archived by OpenSSH](https://www.openssh.com/txt/socks4a.protocol).
+- "socks4". SOCKS protocol version 4, [specification archived by OpenSSH](https://www.openssh.com/txt/socks4.protocol).
 
-Number of online players displayed.  
-If `Online` is less than 0, it will be automatically set to the real-time number of players using this service.  
-显示的在线玩家数量。  
-如果`Online`小于0，会自动设置为使用该服务的实时玩家人数。  
+> `Network` *(Requied)* : string (network type)
 
-> `EnableMaxLimit` : boolean
+Network type for remote connections. Available options are:  
+用于远程连接的网络类型。可用的选项有：
 
-Enable max player number limit and use the number in `Max` as the maximum number of players.  
-启用最大玩家数量限制，并将`Max`中的数字作为最大玩家数。
+- "tcp". Dual stack IPv4/IPv6 dial with [RFC6555 Happy Eyeballs](https://www.rfc-editor.org/rfc/rfc6555.txt) support (by Go standard library).
+- "tcp4". IPv4 only.
+- "tcp6". IPv6 only.
+
+> `Address` : string
+
+The address of your outbound server (if `Type` is not empty), in host:port format.  
+For example, "localhost:1080".  
+出站服务器的地址（如果 `Type` 不为空），主机名:端口 格式。  
+例如，"localhost:1080".
+
+> [!NOTE]  
+> IPv6 addresses here should be wrapped with square brackets. For example, "[::1]:1080".
+> 此处的 IPv6 地址应使用方括号包裹。例如 "[::1]:1080".
