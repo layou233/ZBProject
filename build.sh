@@ -10,7 +10,7 @@ mv public ../public
 cd ../
 
 # build doc
-npm i -g gitbook-cli && gitbook build ./docs ./public/doc
+npm i -g honkit && honkit build ./docs ./public/doc
 
 # copy static pages
 mv app ./public/app
