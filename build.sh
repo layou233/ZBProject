@@ -10,7 +10,11 @@ mv public ../public
 cd ../
 
 # build doc
-npm i -g honkit && honkit build ./docs ./public/doc
+npm i -g honkit && honkit build ./gitbook-doc ./public/doc
+
+# build ZBProxy doc
+pip install mkdocs-material mkdocs-static-i18n
+mkdocs build -f ./zbproxy-doc/mkdocs.yml -d ../public/doc/ZBProxy
 
 # copy static pages
 mv app ./public/app

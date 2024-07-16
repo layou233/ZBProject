@@ -1,0 +1,122 @@
+site_name: ZBProxy
+site_author: Launium
+site_url: https://launium.com/doc/ZBProxy
+repo_url: https://github.com/layou233/ZBProxy
+repo_name: layou233/ZBProxy
+copyright: Copyright &copy; 2021 Launium (aka layou233)
+site_description: 🚀 A simple, fast, high performance multipurpose TCP relay, primarily developed for building Hypixel reverse proxies.
+theme:
+  name: material
+  logo: https://launium.com/favicon.ico
+  favicon: https://launium.com/favicon.ico
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.indexes
+    - navigation.expand
+    - navigation.sections
+    - header.autohide
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+    - search.highlight
+    - search.share
+    - search.suggest
+
+nav:
+  - Home:
+      - index.md
+  - Installation:
+      - installation/download_from_release.md
+      - installation/build_from_source.md
+      - Setup:
+        - installation/setup/index.md
+        - installation/setup/systemd.md
+  - Configuration:
+        - configuration/index.md
+        - configuration/log.md
+        - configuration/service.md
+        - Protocol:
+          - configuration/protocol/minecraft.md
+        - Shared:
+          - configuration/shared/access_control.md
+
+markdown_extensions:
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.magiclink
+  - admonition
+  - attr_list
+  - md_in_html
+  - footnotes
+  - def_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+extra:
+  social:
+    - icon: material/home
+      link: https://launium.com
+    - icon: fontawesome/brands/github
+      link: https://github.com/layou233/ZBProxy
+  generator: false
+plugins:
+  - search
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      languages:
+        - build: true
+          default: true
+          locale: en
+          name: English
+        - build: true
+          default: false
+          locale: zh
+          name: 简体中文
+          nav_translations:
+            Home: 开始
+
+            Installation: 安装
+            Download from Release: 从 Release 下载
+            Build from source: 从源码编译
+            Setup: 设置
+
+            Configuration: 配置
+            Protocol: 协议
+            Shared: 共享
+            Access Control: 访问控制
+
+      reconfigure_material: true
+      reconfigure_search: true
