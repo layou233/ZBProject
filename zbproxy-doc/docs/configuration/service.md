@@ -58,7 +58,7 @@ For more information, go to [access control](shared/access_control.md) page.
 
 ### SocketOptions
 
-Native socket options.
+Native socket options. (Inbound)
 
 For more information, go to [socket options](shared/socket_options.md) page.
 

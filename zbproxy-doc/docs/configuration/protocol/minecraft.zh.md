@@ -67,11 +67,11 @@ MOTD 中显示的在线玩家数量和总玩家数量限制的设置。
 ??? note
     假设我们在 mc.example.com:25565 有一个 Minecraft 服务器，并且我们有一个指向它的 SRV 记录 (_minecraft._tcp.example.com)。
 
-    因此玩家可以通过 `example.com` 毫无问题地加入此服务器。但是，客户端在请求 MOTD 和加入游戏时发送不同的主机名。
+    因此玩家可以毫无疑问地通过 `example.com` 加入此服务器。但是，客户端在请求 MOTD 和加入游戏时发送不同的主机名。
     客户端将在：
 
     - 请求 MOTD 时发送 `example.com`，与您在游戏中输入的相同。
-    - 加入游戏时发送 `mc.example.com.`。注意最后有一个逗号。
+    - 加入游戏时发送 `mc.example.com.`。注意最后有一个点号。
 
     你应该在编写规则、列表时注意这一点。
 

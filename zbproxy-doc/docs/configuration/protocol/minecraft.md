@@ -70,12 +70,11 @@ Hostname sent by Minecraft clients may be different when connecting to a SRV ser
     The client would send:
 
     - `example.com` when requesting MOTD, the same as you typed in your game.
-    - `mc.example.com.` when joining game. Note there is an comma at the end.
+    - `mc.example.com.` when joining game. Note there is a dot at the end.
 
     You should keep this in mind when writing rules and lists.
 
     Too weird.
-
 
 For more information, go to [access control](shared/access.md) page.
 

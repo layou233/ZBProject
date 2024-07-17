@@ -58,7 +58,7 @@ Service 是 ZBProxy 的入站监听器。所有连接都来自这里。
 
 ### SocketOptions
 
-原生套接字选项。
+原生套接字选项。（入站）
 
 有关更多信息，请转到 [socket options](shared/socket_options.md) 页面。
 

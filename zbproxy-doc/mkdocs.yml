@@ -49,10 +49,22 @@ nav:
         - configuration/index.md
         - configuration/log.md
         - configuration/service.md
+        - configuration/router.md
+        - configuration/outbounds.md
+        - configuration/lists.md
         - Protocol:
           - configuration/protocol/minecraft.md
         - Shared:
           - configuration/shared/access_control.md
+          - configuration/shared/socket_options.md
+          - configuration/shared/proxy.md
+        - Rules:
+          - configuration/rules/always.md
+          - configuration/rules/logic.md
+          - configuration/rules/source_ip.md
+          - configuration/rules/source_ip_version.md
+          - configuration/rules/minecraft_hostname.md
+          - configuration/rules/minecraft_player_name.md
 
 markdown_extensions:
   - pymdownx.inlinehilite
@@ -117,6 +129,10 @@ plugins:
             Protocol: 协议
             Shared: 共享
             Access Control: 访问控制
+            Socket Options: 套接字选项
+            Proxy: 代理
+            Rules: 规则
+            Logic: 逻辑规则
 
       reconfigure_material: true
       reconfigure_search: true

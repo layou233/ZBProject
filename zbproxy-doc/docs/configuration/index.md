@@ -62,3 +62,23 @@ Arrays use square bracket notation with comma-separated elements.
 ```
 
 1. No ending comma in last element. This is important.
+
+### Listable
+
+Listable is a variable type which can be both single value and an array of values.
+
+For example, a listable field of domain rules can be single value:
+
+```json title="Single"
+{
+    "Domain": "example.com"
+}
+```
+
+And also can be an array of values:
+
+```json title="Multi"
+{
+    "Domain": ["example.com", "example.net"]
+}
+```

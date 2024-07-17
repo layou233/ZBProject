@@ -62,3 +62,23 @@ List/Array 是一个 JSON 数组。它是一个由零个或多个元素组成的
 ```
 
 1. 最后一个元素没有结尾逗号。这很重要。
+
+### Listable
+
+Listable 是一个可以含有单个或一列值的可变类型。
+
+例如，一个域名规则的 Listable 字段可以是单一值：
+
+```json title="单一"
+{
+    "Domain": "example.com"
+}
+```
+
+也可以是一列值：
+
+```json title="多个"
+{
+    "Domain": ["example.com", "example.net"]
+}
+```
