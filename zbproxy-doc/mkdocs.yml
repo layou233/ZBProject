@@ -46,25 +46,29 @@ nav:
         - installation/setup/index.md
         - installation/setup/systemd.md
   - Configuration:
-        - configuration/index.md
-        - configuration/log.md
-        - configuration/service.md
-        - configuration/router.md
-        - configuration/outbounds.md
-        - configuration/lists.md
-        - Protocol:
-          - configuration/protocol/minecraft.md
-        - Shared:
-          - configuration/shared/access_control.md
-          - configuration/shared/socket_options.md
-          - configuration/shared/proxy.md
-        - Rules:
-          - configuration/rules/always.md
-          - configuration/rules/logic.md
-          - configuration/rules/source_ip.md
-          - configuration/rules/source_ip_version.md
-          - configuration/rules/minecraft_hostname.md
-          - configuration/rules/minecraft_player_name.md
+      - configuration/index.md
+      - configuration/log.md
+      - configuration/service.md
+      - configuration/router.md
+      - configuration/outbounds.md
+      - configuration/lists.md
+      - Protocol:
+        - configuration/protocol/minecraft.md
+      - Shared:
+        - configuration/shared/access_control.md
+        - configuration/shared/socket_options.md
+        - configuration/shared/proxy.md
+      - Rules:
+        - configuration/rules/always.md
+        - configuration/rules/logic.md
+        - configuration/rules/source_ip.md
+        - configuration/rules/source_ip_version.md
+        - configuration/rules/minecraft_hostname.md
+        - configuration/rules/minecraft_player_name.md
+  - Principle:
+      - principle/index.md
+      - principle/structure.md
+      - principle/development.md
 
 markdown_extensions:
   - pymdownx.inlinehilite
@@ -121,18 +125,13 @@ plugins:
             Home: 开始
 
             Installation: 安装
-            Download from Release: 从 Release 下载
-            Build from source: 从源码编译
             Setup: 设置
 
             Configuration: 配置
             Protocol: 协议
             Shared: 共享
-            Access Control: 访问控制
-            Socket Options: 套接字选项
-            Proxy: 代理
             Rules: 规则
-            Logic: 逻辑规则
+            Principle: 原理
 
       reconfigure_material: true
       reconfigure_search: true

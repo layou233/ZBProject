@@ -1,0 +1,29 @@
+                                  ┌► service 1 ──┐
+                       ┌────────┐ │              │
+                 ┌─────┤Services├─┤► service 2 ──┤ accept
+                 │     └────────┘ │              │ connections
+                 │                │► service 3 ──┤
+                 │                │              │
+                 │                └► ...         │
+  main           │                               │
+   │             │        ┌──────connections─────┘
+   │ create      │        │
+   │             │        │             ┌►rule 1  │
+┌──▼─────────┐   │     ┌──▼───┐         │         │
+│  ZBProxy   ├───┼─────┤Router├─►Rules──┤►rule 2  │ match
+│  Instance  │   │     └──┬───┘         │         │ in sequence
+└────────────┘   │        │             │►rule 3  │
+                 │        │outbound     │         │
+                 │        │not found    └►...     │
+                 │        │                       ▼
+                 │     default               found outbound
+                 │        │                       │
+                 │        │   ┌───────────────────┘
+                 │        │   │
+                 │     ┌──▼───▼──┐ ┌─► outbound 1
+                 └─────┤Outbounds├─┤
+                       └─────────┘ ├─► outbound 2
+                                   │
+                                   ├─► outbound 3
+                                   │
+                                   └─► ...
