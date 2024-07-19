@@ -69,6 +69,8 @@ nav:
       - principle/index.md
       - principle/structure.md
       - principle/development.md
+  - Examples:
+      - examples/multi_outbound.md
 
 markdown_extensions:
   - pymdownx.inlinehilite
@@ -132,6 +134,8 @@ plugins:
             Shared: 共享
             Rules: 规则
             Principle: 原理
+
+            Examples: 示例
 
       reconfigure_material: true
       reconfigure_search: true

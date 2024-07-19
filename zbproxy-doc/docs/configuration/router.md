@@ -29,6 +29,11 @@ If no rule is matched after checking all rules, the connection will be passed to
 
 If empty, the default outbound is a system dialer. This is for compatibility with legacy versions.
 
+There are some preset outbound:
+
+- `REJECT`: Simply close the connection.
+- `RESET`: Close the connection using TCP reset.
+
 ## Rule Object
 
 ```json
@@ -101,6 +106,11 @@ the connection will jump out of the matching progress and be passed to outbound.
 If empty, it will simply go back to the matching progress and match next rule.
 
 Outbound field has the lowest priority and will be done after sniffing and rewriting.
+
+There are some preset outbound:
+
+- `REJECT`: Simply close the connection.
+- `RESET`: Close the connection using TCP reset.
 
 ### Invert
 
