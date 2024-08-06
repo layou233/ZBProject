@@ -16,6 +16,8 @@
 
 MinecraftPlayerName 按原样匹配 Minecraft 玩家名。
 
+参数是一个 Listable 的字符串。
+
 这是大小写敏感的。
 
 你可以通过 "lists:" 前缀和 List Tag 来引用 Lists 中的列表。

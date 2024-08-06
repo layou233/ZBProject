@@ -61,10 +61,13 @@ nav:
       - Rules:
         - configuration/rules/always.md
         - configuration/rules/logic.md
+        - configuration/rules/service_name.md
         - configuration/rules/source_ip.md
         - configuration/rules/source_ip_version.md
+        - configuration/rules/source_port.md
         - configuration/rules/minecraft_hostname.md
         - configuration/rules/minecraft_player_name.md
+        - configuration/rules/minecraft_status.md
   - Principle:
       - principle/index.md
       - principle/structure.md
