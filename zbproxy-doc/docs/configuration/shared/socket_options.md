@@ -11,8 +11,11 @@ If you want different socket options for inbound and outbound, don't use legacy 
 
 ```json title="InboundSocketOptions"
 {
-    "KeepAlivePeriod": "",
+    "KeepAliveIdle": "",
+    "KeepAliveInterval": "",
+    "KeepAliveCount": 0,
     "Mark": 0,
+    "SendThrough": "",
     "TCPCongestion": "",
     "TCPFastOpen": false,
     "MultiPathTCP": false
@@ -21,9 +24,12 @@ If you want different socket options for inbound and outbound, don't use legacy 
 
 ```json title="OutboundSocketOptions"
 {
-    "KeepAlivePeriod": "",
+    "KeepAliveIdle": "",
+    "KeepAliveInterval": "",
+    "KeepAliveCount": 0,
     "Mark": 0,
     "Interface": "",
+    "SendThrough": "",
     "TCPCongestion": "",
     "TCPFastOpen": false,
     "MultiPathTCP": false
@@ -32,20 +38,36 @@ If you want different socket options for inbound and outbound, don't use legacy 
 
 ## Fields
 
-### KeepAlivePeriod
+### Keep Alive
 
-KeepAlivePeriod specifies the keep-alive period for network connections accepted by listener.
+If the Idle, Interval, or Count fields are zero, a default value is chosen.
 
-The value is a duration string.
-A duration string is a sequence of decimal numbers,
-each with optional fraction and a unit suffix, such as "300ms", "1.5h" or "2h45m".
+If all the fields are negative, the keep alive will be disabled.
+
+The field type of Idle and Interval are duration strings.
+A duration string is a sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "1.5h" or "2h45m".
 
 Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
 
-If zero, keep-alives are enabled if supported by the protocol and operating system.
-Network protocols or operating systems that do not support keep-alives ignore this field.
+See [Go documentation](https://pkg.go.dev/net#KeepAliveConfig) for more details.
 
-If negative, keep-alives are disabled.
+#### KeepAliveIdle
+
+KeepAliveIdle is the time that the connection must be idle before the first keep-alive probe is sent.
+
+If zero, a default value of 15 seconds is used.
+
+#### KeepAliveInterval
+
+KeepAliveInterval is the time between keep-alive probes.
+
+If zero, a default value of 15 seconds is used.
+
+#### KeepAliveCount
+
+KeepAliveCount is the maximum number of keep-alive probes that can go unanswered before dropping a connection.
+
+If zero, a default value of 9 is used.
 
 ### Mark
 
@@ -58,6 +80,13 @@ Support: Linux, FreeBSD (user cookie)
 Bind interface for outbound connection by interface name.
 
 Support: Linux
+
+### SendThrough
+
+!!! warning
+    This is an experimental feature. Please report if you encounter any problem.
+
+The IP address to use for outbound connections.
 
 ### TCPCongestion
 

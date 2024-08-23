@@ -12,41 +12,63 @@
 
 ```json title="InboundSocketOptions"
 {
-"KeepAlivePeriod": "",
-"Mark": 0,
-"TCPCongestion": "",
-"TCPFastOpen": false,
-"MultiPathTCP": false
+    "KeepAliveIdle": "",
+    "KeepAliveInterval": "",
+    "KeepAliveCount": 0,
+    "Mark": 0,
+    "SendThrough": "",
+    "TCPCongestion": "",
+    "TCPFastOpen": false,
+    "MultiPathTCP": false
 }
 ```
 
 ```json title="OutboundSocketOptions"
 {
-"KeepAlivePeriod": "",
-"Mark": 0,
-"Interface": "",
-"TCPCongestion": "",
-"TCPFastOpen": false,
-"MultiPathTCP": false
+    "KeepAliveIdle": "",
+    "KeepAliveInterval": "",
+    "KeepAliveCount": 0,
+    "Mark": 0,
+    "Interface": "",
+    "SendThrough": "",
+    "TCPCongestion": "",
+    "TCPFastOpen": false,
+    "MultiPathTCP": false
 }
 ```
 
 ## 字段
 
-### KeepAlivePeriod
+### Keep Alive
 
-KeepAlivePeriod 指定侦听器接受的网络连接的保持活动期。
+如果 Idle、Interval 或 Count 字段为零，则使用默认值。
 
-值是一个持续时间字符串。
+如果所有字段均为负数，则将禁用保持活动。
+
+Idle 和 Interval 的字段类型是持续时间字符串。
 持续时间字符串是一个十进制数，有可选的分数和单位后缀，例如“300ms”、“1.5h”或“2h45m”。
 
-有效时间单位为“ns”、“us”（或“µs”）、“ms”、“s”、“m”、“h”。
+有效时间单位为“ns”、“us”（或 “µs”）、“ms”、“s”、“m”、“h”。
 
-如果为 0，则在协议和操作系统支持的情况下启用保持活动。
+有关更多详细信息，请参阅 [Go 文档](https://pkg.go.dev/net#KeepAliveConfig)。
 
-不支持保持活动的网络协议或操作系统将忽略此字段。
+#### KeepAliveIdle
 
-如果为负数，则禁用保持活动。
+KeepAliveIdle 是在发送第一个保持活动探测之前连接必须处于空闲状态的时间。
+
+如果为零，则使用默认值 15 秒。
+
+#### KeepAliveInterval
+
+KeepAliveInterval 是每次保持活动探测之间的时间。
+
+如果为零，则使用默认值 15 秒。
+
+#### KeepAliveCount
+
+KeepAliveCount 是在断开连接之前可以未答复的最大保持活动探测次数。
+
+如果为零，则使用默认值 9。
 
 ### Mark
 
@@ -59,6 +81,13 @@ KeepAlivePeriod 指定侦听器接受的网络连接的保持活动期。
 通过接口名称绑定出站连接的接口。
 
 支持：Linux
+
+### SendThrough
+
+!!! warning
+    这是一个实验性功能。如遇到任何问题，请报告。
+
+用于建立出站连接的 IP 地址。
 
 ### TCPCongestion
 
