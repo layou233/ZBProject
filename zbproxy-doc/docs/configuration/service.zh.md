@@ -14,6 +14,7 @@ Service 是 ZBProxy 的入站监听器。所有连接都来自这里。
     "TargetPort": 25565,
     "Listen": 25565,
 
+    "EnableProxyProtocol": false,
     "IPAccess": {},
 
     "SocketOptions": {},
@@ -49,6 +50,20 @@ Service 是 ZBProxy 的入站监听器。所有连接都来自这里。
 ==必填==
 
 要监听的端口为 0.0.0.0。（从 0 到 65535）
+
+### EnableProxyProtocol
+
+启用 PROXY 协议监听入站连接。
+
+同时支持 PROXY 协议版本 1 和 2。
+
+完整的协议规范可在此处找到： https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt
+
+!!! warning
+    这将拒绝任何未启用 PROXY 协议的连接。
+
+    我们不提供 PROXY 协议连接和非 PROXY 协议连接的兼容性
+    因为这通常会导致不当配置和漏洞。
 
 ### IPAccess
 

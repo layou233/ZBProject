@@ -13,6 +13,7 @@
 
     "SocketOptions": {},
     "ProxyOptions": {},
+    "ProxyProtocolVersion": 0,
 
     "Minecraft": {},
     "TLSSniffing": {},
@@ -58,6 +59,17 @@
 出站代理类型。
 
 有关更多信息，请转到 [proxy](shared/proxy.md) 页面。
+
+### ProxyProtocolVersion
+
+PROXY 协议版本号，由 HAProxy 提出。
+
+可用版本为 1 和 2。默认值 0 禁用 PROXY 协议。
+
+PROXY 协议将客户端的源地址传递到远程服务器。
+这需要服务器支持。如果您不理解，请不要启用此功能。
+
+完整的协议规范可在此处找到： https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt
 
 ### Minecraft
 

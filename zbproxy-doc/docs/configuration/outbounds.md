@@ -13,6 +13,7 @@ Outbound is where the connection finally goes. It controls how connections will 
 
     "SocketOptions": {},
     "ProxyOptions": {},
+    "ProxyProtocolVersion": 0,
 
     "Minecraft": {},
     "TLSSniffing": {},
@@ -59,6 +60,17 @@ For more information, go to [socket options](shared/socket_options.md) page.
 Outbound proxy type.
 
 For more information, go to [proxy](shared/proxy.md) page.
+
+### ProxyProtocolVersion
+
+Version of PROXY protocol proposed by HAProxy.
+
+Available versions are 1 and 2. The default value 0 disables the PROXY protocol.
+
+PROXY protocol will pass the source address of client to remote server.
+This requires server support. Don't enable this if you don't understand it.
+
+The full protocol specification can be found at https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt
 
 ### Minecraft
 

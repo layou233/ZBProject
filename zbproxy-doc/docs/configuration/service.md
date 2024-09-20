@@ -14,6 +14,7 @@ Service is the inbound listener of ZBProxy. All connections come from here.
     "TargetPort": 25565,
     "Listen": 25565,
 
+    "EnableProxyProtocol": false,
     "IPAccess": {},
 
     "SocketOptions": {},
@@ -49,6 +50,20 @@ The port of the address you want to proxy. (from 0 to 65535)
 ==Required==
 
 The port you want to listen on 0.0.0.0. (from 0 to 65535)
+
+### EnableProxyProtocol
+
+Enable PROXY protocol listening for inbound connections.
+
+Both PROXY protocol version 1 and 2 are supported.
+
+The full protocol specification can be found at https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt
+
+!!! warning
+    This will reject any connection that did not enable PROXY protocol.
+
+    We don't provide compatibiliy for PROXY protocol connections and non-PROXY protocol connections
+    because it usually leads to improper configuration and vulnerability.
 
 ### IPAccess
 
