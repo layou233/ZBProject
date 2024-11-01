@@ -13,6 +13,7 @@
         "Sample": [] //(1)!
     },
     "IgnoreFMLSuffix": false,
+    "IgnoreSRVRedirect": false,
     "HostnameAccess": {},
     "NameAccess": {},
     "PingMode": "",
@@ -51,6 +52,13 @@ This will ignore the FML signature that mentioned in this issue, which may cause
 But for some servers, this could help players to bypass the client mods check.
 
 It has been observed in practice that this may cause the FML client to print a lot of warning logs (but does not affect the game), so change it at your own risk.
+
+### IgnoreSRVRedirect
+
+!!! note
+    Minecraft outbounds will check the Minecraft SRV records (`_minecraft._tcp.<metadata.target_address>`) of the target address and follow it before connecting.
+
+This will skip the SRV check and connect directly to the target.
 
 ### HostnameAccess
 
@@ -173,4 +181,4 @@ And a simplified format, just a simple array of tooltip strings:
 
 If you choose the simplified format, we will automatically generate unique UUIDs for every sample, which could save you a lot of time.
 
-The simplified format is recommended for most usages, unless you have the demand for customizing UUID.
+The simplified format is recommended for most usages, unless you have the demand for customizing or stabilizing UUID.

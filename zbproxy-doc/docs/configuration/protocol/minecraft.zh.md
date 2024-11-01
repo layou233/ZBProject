@@ -13,6 +13,7 @@
         "Sample": [] //(1)!
     },
     "IgnoreFMLSuffix": false,
+    "IgnoreSRVRedirect": false,
     "HostnameAccess": {},
     "NameAccess": {},
     "PingMode": "",
@@ -51,6 +52,13 @@ MOTD 中显示的在线玩家数量和总玩家数量限制的设置。
 但对于某些服务器，这可以帮助玩家绕过客户端 mods 检查。
 
 在实践中观察到，这可能会导致 FML 客户端打印大量警告日志（但不影响游戏），因此请自行承担更改风险。
+
+### IgnoreSRVRedirect
+
+!!! note
+    Minecraft 出站在连接前检查目标地址的 Minecraft SRV 记录（`_minecraft._tcp.<metadata.target_address>`）并遵循它。
+
+这将跳过 SRV 检查并直接连接到目标。
 
 ### HostnameAccess
 
@@ -174,4 +182,4 @@ Minecraft 服务器列表的 MOTD。
 
 如果您选择简化格式，我们将自动为每个样本生成唯一的 UUID，这可以为您节省大量时间。
 
-对于大多数用途，建议使用简化格式，除非您有自定义 UUID 的需求。
+对于大多数用途，建议使用简化格式，除非您有自定义或固定 UUID 的需求。

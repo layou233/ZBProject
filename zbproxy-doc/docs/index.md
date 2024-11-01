@@ -23,6 +23,5 @@ You can find the level of your processor from the [table in this website](https:
 
 For more information, go to [Go official wiki](https://go.dev/wiki/MinimumRequirements#amd64) page.
 
-
 ## Disclaimer
 **ZBProxy** is a free software of **[@layou233](https://github.com/layou233)** and are in no way associated with Hypixel Inc or Mojang Studios.

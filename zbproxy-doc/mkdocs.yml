@@ -41,6 +41,7 @@ nav:
       - index.md
   - Installation:
       - installation/download_from_release.md
+      - installation/download_from_ci.md
       - installation/build_from_source.md
       - Setup:
         - installation/setup/index.md
