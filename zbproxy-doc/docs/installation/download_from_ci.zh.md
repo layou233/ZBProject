@@ -9,7 +9,7 @@ icon: material/download-network
 CI 构建为您提供具有未发布和开发中功能的 ZBProxy 构建。
 这**不是**夜间构建，因为我们仅在软件达到一定稳定性水平时才构建它们。
 
-这将比您自己从源代码构建提供更多便利。
+这将比您自己[从源码构建](build_from_source.md)提供更多便利。
 
 ## 下载
 

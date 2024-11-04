@@ -1,6 +1,5 @@
 baseurl = "https://launium.com"
 languageCode = "en-us"
-paginate = 5
 title = "Launium's Blog"
 
 # Theme i18n support
@@ -13,3 +12,6 @@ hasCJKLanguage = true
 
 # Change it to your Disqus shortname before using
 disqusShortname = ""
+
+[pagination]
+pagerSize = 5
