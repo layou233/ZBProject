@@ -83,6 +83,7 @@ category = "Comments"
 categoryID = "DIC_kwDOGQjIm84CQ7q7"
 mapping = "pathname"
 lightTheme = "light"
+lang = "en"
 darkTheme = "dark_dimmed"
 reactionsEnabled = 1
 emitMetadata = 0
