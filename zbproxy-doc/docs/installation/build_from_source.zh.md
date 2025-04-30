@@ -54,13 +54,28 @@ cd ZBProxy
     set GOAMD64=v3
     ```
 
-使用 Go 命令行工具进行构建。以下命令将最小化的可执行文件构建到工作目录。
+使用 Go 命令行工具（或 Make）进行构建。以下命令将最小化的可执行文件构建到工作目录。
 
-```shell
-go build -v -trimpath -ldflags="-s -w -buildid=" ./cmd/zbproxy
-```
+=== ":fontawesome-brands-golang: Go"
 
-待 Go 退出后，您将找到 `zbproxy` 文件（ Windows 上为 `zbproxy.exe`）。
+    ```shell
+    go build -v -trimpath -ldflags="-s -w -buildid=" ./cmd/zbproxy
+    ```
+
+=== ":simple-make: Make"
+
+    ```shell
+    make build
+    ```
+
+待编译结束后，您将找到 `zbproxy` 文件（ Windows 上为 `zbproxy.exe`）。
+
+!!! info
+    对于 Unix 用户：您应该同时为文件授予执行权限。
+
+    ```shell
+    chmod +x zbproxy
+    ```
 
 一切就绪。然后按照 [设置](../setup) 中的步骤操作。
 

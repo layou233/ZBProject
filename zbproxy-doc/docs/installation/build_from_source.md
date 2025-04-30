@@ -54,13 +54,28 @@ If you know your AMD64 architecture level X, set environment variable `GOAMD64` 
     set GOAMD64=v3
     ```
 
-And build with Go command line tool. The following command builds a minimized executable file to the working directory.
+And build with Go command line tool (or Make). The following command builds a minimized executable file to the working directory.
 
-```shell
-go build -v -trimpath -ldflags="-s -w -buildid=" ./cmd/zbproxy
-```
+=== ":fontawesome-brands-golang: Go"
 
-You'll find `zbproxy` (or `zbproxy.exe` on Windows) after Go exits.
+    ```shell
+    go build -v -trimpath -ldflags="-s -w -buildid=" ./cmd/zbproxy
+    ```
+
+=== ":simple-make: Make"
+
+    ```shell
+    make build
+    ```
+
+You'll find `zbproxy` (or `zbproxy.exe` on Windows) after compilation.
+
+!!! info
+    For Unix users: You should also grant execution permission to the file.
+
+    ```shell
+    chmod +x zbproxy
+    ```
 
 All done. Then follow the steps in [Setup](../setup).
 
