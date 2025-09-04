@@ -3,6 +3,8 @@
 
 [QQ 群 714848320](https://qm.qq.com/q/g1bWuusous) | [宣传片](https://www.bilibili.com/video/BV16p7QzgEgB)
 
+Lite version: [![Lite on Modrinth](https://img.shields.io/modrinth/dt/ghostify-lite?style=for-the-badge&label=Modrinth&color=darkgreen&labelColor=black&logo=modrinth)](https://modrinth.com/mod/ghostify-lite)
+
 Ghostify 是一个基于高版本 Minecraft 的**免费** Hypixel Skyblock 辅助模组，侧重于视觉效果与体验提升，并弥补了其他 Skyblock 模组的空白部分。
 
 Ghostify 是基于 Fabric 的模组，前置模组为 Fabric API，当前支持的 Minecraft 游戏版本为 1.21.5。Ghostfiy 目标定位为 *（尽可能）* 合法的辅助。我们不希望带来额外的游戏优势，只是让游戏不再糟糕，因此适合主账号长期游玩使用，而**无需担心封禁风险**。
@@ -23,9 +25,13 @@ Ghostify 是基于 Fabric 的模组，前置模组为 Fabric API，当前支持�
   - Spirit 宠物警告
   - 房间历史、上次访问时间显示
   - （支持开关/默认关）Pickobulus 预测
+  - （支持开关/默认关）砍树姿势警告
+  - （支持开关/默认关）RNG 掉落结算画面
 
 - 功能列表（Module List） HUD
+
   支持调整对齐。自带高清平滑字体实现。
+
 - （支持开关/默认关）房间 Day 数显示
 
 ### 其他
@@ -35,7 +41,9 @@ Ghostify 是基于 Fabric 的模组，前置模组为 Fabric API，当前支持�
 - 移除窒息时的方块画面阻挡
 - 阻止 Shortbow 拉弓卡手
 - 阻止 Skyblocker 对发光效果进行深度测试渲染
+
   如果启用 Skyblocker 里的某些发光效果ESP功能，他们会让发光效果在障碍物后不可见。我们将阻止 Skyblocker 这样做。
+- （支持开关/默认关）跳过“确认执行命令”对话框
 - （危险/支持开关/默认关）竖琴助手
 - （危险/支持开关/默认关）幽灵方块
 - （危险/支持开关/默认关）越墙视野 Camera No Clip
@@ -47,6 +55,8 @@ Ghostify 是基于 Fabric 的模组，前置模组为 Fabric API，当前支持�
 这意味着使用者不能将其源码/资源文件（或反编译后的源码/资源文件）用于与其构成竞争关系的模组，除非获得许可。
 
 请勿转售该模组，或为该模组的获取方式设置任何门槛/前提条件。
+
+承诺：当我决定退出该模组开发时，我会将其改为 LGPL 协议版本2或3，并将其完全开源以回馈社区。
 
 ### 你可以
 
