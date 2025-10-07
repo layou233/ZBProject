@@ -118,6 +118,15 @@ Windows 用户下载时请先将鼠标移至“Download”按钮，然后点选�
 
 ### GraalVM
 
+由于 Oracle 宣布 GraalVM 将专注于 Java 以外的语言（Python、JS）并不再发布新的 GraalVM for JDK，GraalVM 作为 Java 发行版已正式坠机🤡。
+详见[官方通知](https://blogs.oracle.com/java/post/detaching-graalvm-from-the-java-ecosystem-train)。
+
+在此之前，Oracle 已[将 GraalVM CE Java 代码捐赠给 OpenJDK](https://www.graalvm.org/2022/openjdk-announcement/)，因此部分优化已经或即将加入 OpenJDK。
+
+该节原文可能不再具有参考价值、过期并已折叠，展开以阅读：
+
+<details>
+
 既然 Azul 有这么杀手锏的产品，作为 Java 本家的 Oracle 自然也有好东西应敌。
 Oracle GraalVM 是一个使用即时 (JIT) 编译器加速 Java 和 JVM 应用性能的高性能 JDK。它能够降低应用延迟，通过缩短垃圾回收时间提高峰值吞吐量。它同时支持 Linux、Windows、macOS 等多平台。
 
@@ -134,6 +143,8 @@ Graal JIT 同时也被反向引入了 OpenJDK 中，但目前属于实验性 VM 
 此外，GraalVM Native Image 可提前 (AOT) 编译 Java 字节码，生成可近乎瞬时启动且仅占用极少内存资源的本机可执行文件。
 Java 的 AOT 编译并不是什么新概念，且至少已有20年研究历史，世界上运行最广的 Java AOT 编译器就是 Android Runtime，在数十亿生产环境设备已部署十余年之久。
 在我来看，这是 Java 在云原生时代的一次补票尝试，然而对于游戏来说，启动时间并不重要，而且 Minecraft 也不能直接使用 GraalVM 进行 AOT 编译，所以我们暂时略过这一点。
+
+</details>
 
 它是高度自定义的 JDK。
 
@@ -176,6 +187,14 @@ https://adoptium.net/temurin/releases
 
 然而，你作为在这些商业相关许可证范围之外的个人，不必困在这样的大坑里。
 因此，跟随上面的介绍，下载并使用一个最新的 OpenJDK 吧~
+
+### Trust Store 老旧导致 HTTPS 连接失败
+
+2025年10月初，Mojang 验证基础设施的网站证书进行了例行更换。这次更换后的新证书需要 TLS 客户端信任 DigiCert Global Root G2 根证书才能完成信任，而老旧的 Java 发行版中（据[报道](https://www.reddit.com/r/Minecraft/comments/1nxagcd/fix_the_authentication_servers_are_currently_down/)是 8u91 之前的版本）所携带的 Trust Store 中尚未包含该根证书。
+
+这导致了 Java 8u51 等老版本 Java 用户无法与玩家验证相关接口 sessionserver.mojang.com 建立 HTTPS 连接，致使玩家无法加入多人游戏。上面提到的问题仅在该文首发一个月不到之后就产生了如此严重的服务失败问题...
+
+网上的缓解方案多种多样，然而真正的解决方法只有一个——更新你的 Java 版本。保持更新到最新的 Java 小版本，即可修复新证书的信任问题，同时获得性能提升。
 
 ## 彩蛋
 
