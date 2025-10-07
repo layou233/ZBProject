@@ -5,6 +5,8 @@
 
 Lite version: [![Lite on Modrinth](https://img.shields.io/modrinth/dt/ghostify-lite?style=for-the-badge&label=Modrinth&color=darkgreen&labelColor=black&logo=modrinth)](https://modrinth.com/mod/ghostify-lite)
 
+The English description can be found at Modrinth linked above.
+
 Ghostify 是一个基于高版本 Minecraft 的**免费** Hypixel Skyblock 辅助模组，侧重于视觉效果与体验提升，并弥补了其他 Skyblock 模组的空白部分。
 
 Ghostify 是基于 Fabric 的模组，前置模组为 Fabric API，当前支持的 Minecraft 游戏版本为 1.21.5。Ghostfiy 目标定位为 *（尽可能）* 合法的辅助。我们不希望带来额外的游戏优势，只是让游戏不再糟糕，因此适合主账号长期游玩使用，而**无需担心封禁风险**。
@@ -26,13 +28,26 @@ Ghostify 是基于 Fabric 的模组，前置模组为 Fabric API，当前支持�
   - 房间历史、上次访问时间显示
   - （支持开关/默认关）Pickobulus 预测
   - （支持开关/默认关）砍树姿势警告
-  - （支持开关/默认关）RNG 掉落结算画面
+  - （支持开关/默认关）RNG 出货结算画面
 
-- 功能列表（Module List） HUD
+- #### 功能列表（Module List） HUD
 
   支持调整对齐。自带高清平滑字体实现。
 
-- （支持开关/默认关）房间 Day 数显示
+  - （支持开关/默认关）房间 Day 数显示
+  - （支持开关/默认关）Auto Tip
+
+- 快速拨号
+
+  - 比以往更轻松、更快捷地拨打联系人电话。请参阅图库中的展示和游戏内点击 GUI 的说明。
+
+- 开局通知
+
+  - （支持开关/默认开）
+  - 如果游戏窗口未聚焦，进入 地牢/Kuudra 时会弹出系统通知。在等待 downtime 或寻找队伍时尽情网上冲浪。
+  - 需要较新的系统版本才能在 Windows 10/11 上运行。已在 Windows 10 22H2 和 Windows 11 23H2 上测试并运行正常。
+  - 需要 libnotify 才能在 Linux 上运行。
+  - macOS 支持可能已损坏；如果您能帮助我们修复此问题，请通过 GitHub 联系。
 
 ### 其他
 

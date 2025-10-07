@@ -10,3 +10,4 @@
   * [TLS](OldZBProxy/tls.md)
   * [Flow](OldZBProxy/flow.md)
 * [Ghostify](Ghostify/README.md)
+  * [SpeedDial](Ghostify/SpeedDial.md)
