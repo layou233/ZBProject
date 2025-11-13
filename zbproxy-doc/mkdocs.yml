@@ -69,6 +69,7 @@ nav:
         - configuration/rules/minecraft_hostname.md
         - configuration/rules/minecraft_player_name.md
         - configuration/rules/minecraft_status.md
+        - configuration/rules/minecraft_transfer.md
   - Principle:
       - principle/index.md
       - principle/structure.md

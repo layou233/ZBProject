@@ -30,7 +30,9 @@
 
 Hostname rewritten is used to bypass Hypixel unofficial hostname detection etc.
 
-If you are proxying Hypixel, turn on this.
+Since Hypixel is now rejecting connections claiming non-25565 port in the handshake packet, this may temporarily not work if your service is listening on non-25565 port.
+
+If you are proxying Hypixel on non-25565 port, use [rewrite rule](../router.md#rewrite) instead to also rewrite the port field for now.
 
 ### RewriteHostname
 
@@ -84,13 +86,13 @@ Hostname sent by Minecraft clients may be different when connecting to a SRV ser
 
     Too weird.
 
-For more information, go to [access control](shared/access.md) page.
+For more information, go to [access control](../shared/access_control.md) page.
 
 ### NameAccess
 
 Access control module for restricting player name access.
 
-For more information, go to [access control](shared/access.md) page.
+For more information, go to [access control](../shared/access_control.md) page.
 
 ### PingMode
 

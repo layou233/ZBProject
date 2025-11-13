@@ -9,4 +9,4 @@
 !!! note
     You should sniff Minecraft protocol before using this.
 
-MinecraftPlayerName matches all Minecraft server list MOTD request.
+MinecraftStatus matches all Minecraft server list MOTD request.

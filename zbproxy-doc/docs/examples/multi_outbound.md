@@ -29,6 +29,12 @@ When players connect from different domains, we want to proxy them to different 
         "Parameter": {
             "Domain": "a.example.com"//(1)!
         },
+        "Rewrite": {
+          "Minecraft": {
+            "Hostname": "mc.hypixel.net",
+            "Port": 25565
+          }
+        },
         "Outbound": "a-out"
       },
       {
@@ -46,7 +52,6 @@ When players connect from different domains, we want to proxy them to different 
       "TargetAddress": "mc.hypixel.net",
       "TargetPort": 25565,
       "Minecraft": {
-        "EnableHostnameRewrite": true,
         "OnlineCount": {
           "Max": 20,
           "Online": -1,

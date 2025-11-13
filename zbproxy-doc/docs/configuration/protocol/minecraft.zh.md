@@ -30,7 +30,9 @@
 
 主机名重写用于绕过 Hypixel 非官方主机名检测等。
 
-如果您正在代理 Hypixel，请打开此功能。
+由于 Hypixel 现在会拒绝握手数据包中声明端口号非 25565 的连接，如果你的服务监听的是非 25565 端口，则此方法可能暂时无效。
+
+如果你正在用非 25565 端口代理 Hypixel，请暂时使用 [重写规则](../router.zh.md#rewrite) 来同时重写端口字段。
 
 ### RewriteHostname
 
@@ -85,13 +87,13 @@ MOTD 中显示的在线玩家数量和总玩家数量限制的设置。
 
     离大谱。
 
-有关更多信息，请转到 [访问控制](shared/access.md) 页面。
+有关更多信息，请转到 [访问控制](../shared/access_control.zh.md) 页面。
 
 ### NameAccess
 
 用于限制玩家名称访问的访问控制模块。
 
-有关更多信息，请转到 [访问控制](shared/access.md) 页面。
+有关更多信息，请转到 [访问控制](../shared/access_control.zh.md) 页面。
 
 ### PingMode
 
