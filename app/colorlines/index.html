@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#eee9df">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#15171c">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+<link rel="manifest" href="manifest.json">
+<title>五子连珠</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  color-scheme:light dark;
+  --bg:#eee9df; --text:#41403c; --muted:#8a877e;
+  --panel:#fbf9f4; --board:#d8d1c1; --cell:#e9e4d7;
+  --line:#00000014; --shadow:0 1px 3px #0002;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#15171c; --text:#d7dae2; --muted:#7d828d;
+    --panel:#21242c; --board:#0e1014; --cell:#262a33;
+    --line:#ffffff14; --shadow:0 1px 3px #0006;
+  }
+}
+html,body{margin:0}
+body{
+  background:var(--bg); color:var(--text);
+  font-family:system-ui,"Segoe UI",sans-serif;
+  min-height:100dvh; display:flex; justify-content:center;
+  -webkit-tap-highlight-color:transparent; user-select:none;
+}
+main{
+  --bw:min(94vw, 520px, calc(100dvh - 200px));
+  width:var(--bw); display:flex; flex-direction:column; gap:12px; padding:14px 0;
+}
+header{display:flex; flex-wrap:wrap; align-items:center; gap:8px}
+h1{font-size:clamp(20px,6vmin,28px); margin:0 auto 0 0; letter-spacing:2px}
+.hud{display:flex; gap:8px}
+.panel{
+  background:var(--panel); border-radius:12px; padding:4px 12px; min-width:60px;
+  display:flex; flex-direction:column; align-items:center; gap:2px; box-shadow:var(--shadow);
+}
+.panel small{font-size:11px; color:var(--muted)}
+.panel b{font-size:17px; font-variant-numeric:tabular-nums}
+#next{display:flex; gap:4px; padding:3px 0}
+.dot{position:relative; width:18px; height:18px}
+
+#board{
+  position:relative; display:grid; grid-template-columns:repeat(9,1fr);
+  gap:clamp(2px,.7vmin,4px); padding:clamp(4px,1vmin,7px);
+  width:var(--bw); aspect-ratio:1; border-radius:14px;
+  background:var(--board); box-shadow:var(--shadow); touch-action:manipulation;
+}
+.cell{
+  position:relative; border-radius:18%; background:var(--cell);
+  box-shadow:inset 1px 2px 3px #0002, inset -1px -1px 2px #ffffff1f;
+}
+#board.has-sel .cell:not(.b), .cell.b{cursor:pointer}
+
+/* glossy ball, tinted via --c */
+.b::after{
+  content:""; position:absolute; inset:11%; border-radius:50%;
+  background:
+    radial-gradient(circle at 33% 28%, #fffd 0 6%, #fff0 30%),
+    radial-gradient(circle at 42% 38%,
+      color-mix(in srgb,var(--c),#fff 25%), var(--c) 55%,
+      color-mix(in srgb,var(--c),#000 38%));
+  box-shadow:inset -2px -3px 5px #0003, 1px 3px 4px #0004;
+}
+.c1{--c:#e23d3d}.c2{--c:#f5811f}.c3{--c:#efc31c}.c4{--c:#3fae4e}
+.c5{--c:#2ab5c9}.c6{--c:#4169e1}.c7{--c:#a64ce0}
+
+.sel::after{animation:bounce .55s ease-in-out infinite}
+.pop::after{animation:pop .28s cubic-bezier(.5,1.6,.6,1)}
+.land::after{animation:land .18s ease-out}
+.out::after{animation:vanish .34s ease-in forwards}
+.deny{animation:shake .16s linear 2}
+@keyframes bounce{50%{transform:translateY(12%) scaleY(.87)}}
+@keyframes pop{from{transform:scale(0)}70%{transform:scale(1.12)}}
+@keyframes land{from{transform:scale(1.1)}60%{transform:scale(.94)}to{transform:scale(1)}}
+@keyframes vanish{40%{transform:scale(1.18)}to{transform:scale(0);opacity:0}}
+@keyframes shake{25%{transform:translateX(-7%)}75%{transform:translateX(7%)}}
+
+.fly{position:absolute; left:0; top:0; z-index:2; pointer-events:none}
+.spawn-fly{position:fixed; left:0; top:0; z-index:10; pointer-events:none; transform-origin:0 0}
+
+#overlay{
+  position:absolute; inset:0; z-index:3; border-radius:14px;
+  display:grid; place-content:center; gap:10px; text-align:center;
+  background:color-mix(in srgb,var(--bg) 72%,transparent); backdrop-filter:blur(5px);
+  opacity:0; pointer-events:none; transition:opacity .3s;
+}
+#overlay.show{opacity:1; pointer-events:auto}
+#overlay h2{margin:0; font-size:26px}
+#overlay p{margin:0; color:var(--muted)}
+#overlay button{padding:10px 26px}
+
+.bar{display:flex; gap:8px}
+button{
+  flex:1; min-height:42px; font:inherit; color:inherit; cursor:pointer;
+  background:var(--panel); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow);
+}
+button:hover:not(:disabled){filter:brightness(1.06)}
+button:active:not(:disabled){transform:scale(.97)}
+button:disabled{opacity:.4; cursor:default}
+#mute{flex:0 0 52px}
+
+footer{font-size:11px; color:var(--muted); text-align:center}
+
+@media (max-width:400px){
+  .panel{padding:4px 8px; min-width:52px}
+  h1{letter-spacing:1px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::after{animation:none!important; transition:none!important}
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>五子连珠</h1>
+    <div class="hud">
+      <div class="panel"><small>得分</small><b id="score">0</b></div>
+      <div class="panel"><small>最高</small><b id="best">0</b></div>
+      <div class="panel"><small>下一组</small><span id="next"><i class="dot"></i><i class="dot"></i><i class="dot"></i></span></div>
+    </div>
+  </header>
+  <div id="board">
+    <div class="fly" id="fly"></div>
+    <div id="overlay"><h2>游戏结束</h2><p>得分 <b id="final">0</b></p><button id="again">再来一局</button></div>
+  </div>
+  <div class="bar">
+    <button id="undo" disabled>↩ 撤销</button>
+    <button id="mute" aria-label="声音开关">🔊</button>
+    <button id="new">新游戏</button>
+  </div>
+  <footer>仿 1998 WinLinez · 移动彩球，同色五球连线即可消除</footer>
+</main>
+<script>
+(() => {
+'use strict';
+const N = 9, CELLS = N * N, COLORS = 7, SPAWN = 3, LINE = 5;
+const $ = id => document.getElementById(id);
+const boardEl = $('board'), flyEl = $('fly'), overlayEl = $('overlay');
+const scoreEl = $('score'), bestEl = $('best'), finalEl = $('final');
+const undoBtn = $('undo'), muteBtn = $('mute');
+const dots = [...document.querySelectorAll('.dot')];
+const rnd = n => Math.random() * n | 0;
+const randColor = () => 1 + rnd(COLORS);
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+let board, score, next, undoSnap, sel = null, busy = false, over = false;
+let best = +localStorage.getItem('cl.best') || 0;
+let muted = localStorage.getItem('cl.muted') === '1';
+
+const cells = [];
+for (let i = 0; i < CELLS; i++) {
+  const c = document.createElement('div');
+  c.className = 'cell'; c.dataset.i = i;
+  boardEl.insertBefore(c, flyEl);
+  cells.push(c);
+}
+
+/* ---- audio: tiny synth blips ---- */
+let actx;
+function beep(freq, dur = .1, type = 'sine', at = 0, vol = .15) {
+  if (muted) return;
+  actx ||= new (window.AudioContext || window.webkitAudioContext)();
+  if (actx.state === 'suspended') actx.resume();
+  const t = actx.currentTime + at;
+  const o = actx.createOscillator(), g = actx.createGain();
+  o.type = type; o.frequency.value = freq;
+  g.gain.setValueAtTime(vol, t);
+  g.gain.exponentialRampToValueAtTime(.001, t + dur);
+  o.connect(g).connect(actx.destination);
+  o.start(t); o.stop(t + dur);
+}
+const sfx = {
+  select: () => beep(660, .07, 'triangle'),
+  land:   () => beep(290, .09),
+  deny:   () => beep(135, .2, 'sawtooth', 0, .1),
+  spawn:  () => beep(840, .05, 'sine', 0, .07),
+  clear:  () => [523, 659, 784, 1047].forEach((f, k) => beep(f, .14, 'triangle', k * .07)),
+  over:   () => [440, 349, 294, 220].forEach((f, k) => beep(f, .22, 'triangle', k * .18)),
+};
+
+/* ---- persistence ---- */
+Uint8Array.prototype.toBase64 ??= function () { return btoa(String.fromCharCode(...this)); };
+Uint8Array.fromBase64 ??= s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+
+function save() {
+  if (over) return;
+  localStorage.setItem('cl.save', JSON.stringify({
+    board: board.toBase64(), score, next,
+    undo: undoSnap && { board: undoSnap.board.toBase64(), score: undoSnap.score, next: undoSnap.next },
+  }));
+}
+function load() {
+  try {
+    const s = JSON.parse(localStorage.getItem('cl.save'));
+    if (typeof s?.board === 'string' && Array.isArray(s.next)) {
+      const b = Uint8Array.fromBase64(s.board);
+      if (b.length !== CELLS) return false;
+      board = b; score = s.score | 0; next = s.next;
+      undoSnap = s.undo ? { board: Uint8Array.fromBase64(s.undo.board), score: s.undo.score | 0, next: s.undo.next } : null;
+      return true;
+    }
+  } catch {}
+  return false;
+}
+
+/* ---- core logic ---- */
+const empties = () => { const r = []; for (let i = 0; i < CELLS; i++) if (!board[i]) r.push(i); return r; };
+
+function linesAt(i) {
+  const c = board[i], x = i % N, y = i / N | 0, hit = new Set();
+  if (!c) return [];
+  for (const [dx, dy] of [[1, 0], [0, 1], [1, 1], [1, -1]]) {
+    const line = [i];
+    for (const s of [1, -1]) {
+      let nx = x + dx * s, ny = y + dy * s;
+      while (nx >= 0 && nx < N && ny >= 0 && ny < N && board[ny * N + nx] === c) {
+        line.push(ny * N + nx); nx += dx * s; ny += dy * s;
+      }
+    }
+    if (line.length >= LINE) line.forEach(j => hit.add(j));
+  }
+  return [...hit];
+}
+
+function findPath(a, b) {
+  const prev = new Int8Array(CELLS).fill(-1);
+  prev[a] = a;
+  const q = [a];
+  for (let head = 0; head < q.length && prev[b] < 0; head++) {
+    const i = q[head], x = i % N, y = i / N | 0;
+    for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      const nx = x + dx, ny = y + dy, j = ny * N + nx;
+      if (nx < 0 || nx >= N || ny < 0 || ny >= N || board[j] || prev[j] >= 0) continue;
+      prev[j] = i; q.push(j);
+      if (j === b) break;
+    }
+  }
+  if (prev[b] < 0) return null;
+  const path = [b];
+  for (let i = b; i !== a; ) path.push(i = prev[i]);
+  return path.reverse();
+}
+
+function render() {
+  for (let i = 0; i < CELLS; i++) {
+    const v = board[i];
+    cells[i].className = 'cell' + (v ? ' b c' + v : '') + (i === sel ? ' sel' : '');
+  }
+  boardEl.classList.toggle('has-sel', sel !== null);
+  scoreEl.textContent = score;
+  bestEl.textContent = best;
+  dots.forEach((d, k) => d.className = 'dot b c' + next[k]);
+  undoBtn.disabled = !undoSnap;
+}
+
+async function clearBalls(idxs) {
+  sfx.clear();
+  idxs.forEach(i => cells[i].classList.add('out'));
+  score += 10 + 4 * (idxs.length - LINE);
+  if (score > best) { best = score; localStorage.setItem('cl.best', best); }
+  scoreEl.textContent = score; bestEl.textContent = best;
+  await wait(reduced ? 0 : 360);
+  idxs.forEach(i => board[i] = 0);
+}
+
+/* balls fly from the "next" preview onto the board */
+function flyFromNext(placed) {
+  if (reduced || !placed.length) return Promise.resolve();
+  const used = dots.slice(0, placed.length);
+  used.forEach(d => d.style.visibility = 'hidden');
+  return Promise.all(placed.map((cell, k) => {
+    const a = dots[k].getBoundingClientRect(), b = cells[cell].getBoundingClientRect();
+    const el = document.createElement('div');
+    el.className = 'spawn-fly b c' + next[k];
+    el.style.width = el.style.height = b.width + 'px';
+    document.body.appendChild(el);
+    const anim = el.animate([
+      { transform: `translate(${a.left}px,${a.top}px) scale(${a.width / b.width})` },
+      { transform: `translate(${b.left}px,${b.top}px) scale(1)` }
+    ], { duration: 230, delay: k * 50, easing: 'ease-in', fill: 'backwards' });
+    return anim.finished.then(() => el.remove());
+  })).then(() => used.forEach(d => d.style.visibility = ''));
+}
+
+async function spawnBalls() {
+  const placed = [];
+  for (let k = 0; k < SPAWN; k++) {
+    const e = empties();
+    if (!e.length) break;
+    const i = e[rnd(e.length)];
+    board[i] = next[k]; placed.push(i);
+  }
+  sfx.spawn();
+  await flyFromNext(placed);
+  next = Array.from({ length: SPAWN }, randColor);
+  render();
+  placed.forEach(i => cells[i].classList.add(reduced ? 'pop' : 'land'));
+  const hit = new Set();
+  placed.forEach(i => linesAt(i).forEach(j => hit.add(j)));
+  if (hit.size) { await wait(reduced ? 0 : 300); await clearBalls([...hit]); render(); }
+  if (!empties().length) gameOver();
+}
+
+async function move(from, to, path) {
+  busy = true;
+  undoSnap = { board: board.slice(), score, next: [...next] };
+  const color = board[from];
+  sel = null; board[from] = 0; render();
+  flyEl.style.width = flyEl.style.height = cells[0].offsetWidth + 'px';
+  flyEl.className = 'fly b c' + color;
+  const frames = path.map(i => ({ transform: `translate(${cells[i].offsetLeft}px,${cells[i].offsetTop}px)` }));
+  await flyEl.animate(frames, { duration: reduced ? 0 : 130 + path.length * 38, easing: 'linear' }).finished;
+  flyEl.className = 'fly';
+  board[to] = color; render(); sfx.land();
+  const hit = linesAt(to);
+  if (hit.length) await clearBalls(hit);   // a cleared line earns a free turn
+  else await spawnBalls();
+  busy = false; render(); save();
+}
+
+function gameOver() {
+  over = true; sel = null;
+  localStorage.removeItem('cl.save');
+  finalEl.textContent = score;
+  overlayEl.classList.add('show');
+  sfx.over();
+}
+
+function newGame() {
+  board = new Uint8Array(CELLS);
+  score = 0; sel = null; undoSnap = null; over = false;
+  overlayEl.classList.remove('show');
+  next = Array.from({ length: SPAWN }, randColor);
+  for (let k = 0; k < SPAWN; k++) { const e = empties(); board[e[rnd(e.length)]] = randColor(); }
+  render(); save();
+  board.forEach((v, i) => v && cells[i].classList.add('pop'));
+}
+
+/* ---- events ---- */
+boardEl.addEventListener('click', e => {
+  const cell = e.target.closest('.cell');
+  if (!cell || busy || over) return;
+  const i = +cell.dataset.i;
+  if (board[i]) {
+    sel = sel === i ? null : i;
+    if (sel !== null) sfx.select();
+    render();
+  } else if (sel !== null) {
+    const path = findPath(sel, i);
+    if (path) move(sel, i, path);
+    else { cell.classList.add('deny'); sfx.deny(); }
+  }
+});
+boardEl.addEventListener('animationend', e => e.target.classList.remove('pop', 'deny', 'land'));
+
+$('new').onclick = $('again').onclick = () => { if (!busy) newGame(); };
+undoBtn.onclick = () => {
+  if (!undoSnap || busy || over) return;
+  board = undoSnap.board.slice(); score = undoSnap.score; next = [...undoSnap.next];
+  undoSnap = null; sel = null;
+  render(); save();
+};
+function setMute(m) {
+  muted = m;
+  localStorage.setItem('cl.muted', m ? '1' : '0');
+  muteBtn.textContent = m ? '🔇' : '🔊';
+  muteBtn.setAttribute('aria-pressed', m);
+}
+muteBtn.onclick = () => setMute(!muted);
+
+setMute(muted);
+if (!load()) newGame(); else render();
+})();
+</script>
+</body>
+</html>
